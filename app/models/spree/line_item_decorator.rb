@@ -12,7 +12,10 @@ module Spree
       #  self.price = variant.price +
       #    variant.price_modifier_amount(opts)
       #end
-      self.price = 230979
+      #self.price = 230979
+      self.price = 5 * product.price
+      #puts "===== PRECIO CUSTOM ====="
+      #logger.info "***************************************************###############**********************************************"
     end
   end
 end
