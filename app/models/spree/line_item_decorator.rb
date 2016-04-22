@@ -30,12 +30,13 @@ module Spree
       logger.fatal "************* PERIMETER =>#{perimeter} ************"
 
       self.price = if area > 0
-        area * product.price
+        area * variant.price
       else
-        product.price
+        variant.price
       end
-      #puts "===== PRECIO CUSTOM ====="
-      #logger.info "***************************************************###############**********************************************"
+
+      logger.fatal "************* PRICE =>#{variant.price} ************"
+      logger.fatal "************* TOTAL PRICE =>#{self.price} ************"
 
     end
   end
