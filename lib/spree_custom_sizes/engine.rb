@@ -1,6 +1,7 @@
 module SpreeCustomSizes
   class Engine < Rails::Engine
     require 'spree/core'
+    require 'spree/frontend'
     isolate_namespace Spree
     engine_name 'spree_custom_sizes'
 

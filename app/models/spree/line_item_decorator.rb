@@ -13,9 +13,30 @@ module Spree
       #    variant.price_modifier_amount(opts)
       #end
       #self.price = 230979
-      self.price = 5 * product.price
+
+      #area = if !opts[:height].blank? && !opts[:weight].blank?
+      #  opts[:height] * opts[:weight]
+      #else
+      #  400
+      #end
+      logger.fatal "************* ERROR ************"
+      logger.fatal "************* #{opts} ************"
+      logger.fatal "************* H=>#{opts['height']} ************"
+      logger.fatal "************* W=>#{opts['weight']} ************"
+      area = opts['height'].to_i * opts['weight'].to_i
+      perimeter = (opts['height'].to_i + opts['weight'].to_i)*2
+
+      logger.fatal "************* AREA =>#{area} ************"
+      logger.fatal "************* PERIMETER =>#{perimeter} ************"
+
+      self.price = if area > 0
+        area * product.price
+      else
+        product.price
+      end
       #puts "===== PRECIO CUSTOM ====="
       #logger.info "***************************************************###############**********************************************"
+
     end
   end
 end
