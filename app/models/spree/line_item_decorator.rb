@@ -12,8 +12,8 @@ module Spree
 
       #Incluimos los valores de Ancho y Alto
       self.height = options['height'] if !options['height'].blank?
-      self.weight = options['weight'] if !options['weight'].blank?
-      if self.height > 0 and self.weight > 0
+      self.width = options['width'] if !options['width'].blank?
+      if self.height > 0 and self.width > 0
         self.calc_area 
         self.calc_perimeter
       end
@@ -33,19 +33,19 @@ module Spree
           variant.price_modifier_amount(opts)
       end
 
-      #area = opts['height'].to_i * opts['weight'].to_i
-      #perimeter = (opts['height'].to_i + opts['weight'].to_i)*2
+      #area = opts['height'].to_i * opts['width'].to_i
+      #perimeter = (opts['height'].to_i + opts['width'].to_i)*2
       #calc_area(opts)
       #calc_perimeter(opts)
 
       self.price = if self.area > 0
         self.area * self.price
-        #self.name += "SIZE: #{self.height.to_i}x#{self.weight.to_i}"
+        #self.name += "SIZE: #{self.height.to_i}x#{self.width.to_i}"
       end      
 
       #logger.fatal "************* #{opts} ************"
       #logger.fatal "************* H=>#{opts['height']} ************"
-      #logger.fatal "************* W=>#{opts['weight']} ************"
+      #logger.fatal "************* W=>#{opts['width']} ************"
       #logger.fatal "************* AREA =>#{area} ************"
       #logger.fatal "************* PERIMETER =>#{perimeter} ************"
       #logger.fatal "************* PRICE =>#{variant.price} ************"
@@ -67,19 +67,23 @@ module Spree
     end
 
     def calc_area
-      self.area = self.height.to_i * self.weight.to_i if (!self.height.blank? and !self.weight.blank?)
+      self.area = self.height.to_i * self.width.to_i if (!self.height.blank? and !self.width.blank?)
     end
 
     def calc_perimeter
-      self.perimeter = (self.height.to_i + self.weight.to_i)*2 if (!self.height.blank? and !self.weight.blank?)
+      self.perimeter = (self.height.to_i + self.width.to_i)*2 if (!self.height.blank? and !self.width.blank?)
     end
 
     def name
-      if !self.height.blank? && !self.weight.blank?
-        variant.name + " - #{self.height.to_i}x#{self.weight.to_i}"
+      if !self.height.blank? && !self.width.blank?
+        variant.name + " - #{self.size}"
       else
         variant.name
       end
+    end
+
+    def size
+      "#{self.height.to_i}x#{self.width.to_i}"
     end
 
   end

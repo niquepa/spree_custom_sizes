@@ -50,10 +50,10 @@
 
         <% if @product.can_supply? %>
           <div class="add-to-cart">
-            Height
+            Height:
             <%= number_field_tag :"options[height]", 1, class: 'title form-control', min: 1, max: 999 %>
-            Weight
-            <%= number_field_tag :"options[weight]", 1, class: 'title form-control', min: 1, max: 999 %>            
+            Width:
+            <%= number_field_tag :"options[width]", 1, class: 'title form-control', min: 1, max: 999 %>            
           </div>
           <div class="add-to-cart">
             <br />

@@ -32,6 +32,9 @@
             <td class="line-item-qty-edit is-hidden">
               <%= number_field_tag :quantity, item.quantity, min: 0, class: "line_item_quantity form-control", size: 5 %>
             </td>
+            <td class="line-item-size-show text-center">
+              <%= item.size %>
+            </td>            
             <td class="line-item-total text-center"><%= line_item_shipment_price(item, item.quantity) %></td>
             <td class="cart-line-item-delete actions actions-4 text-center" data-hook="cart_line_item_delete">
               <% if can? :update, item %>
