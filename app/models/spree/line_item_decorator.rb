@@ -40,6 +40,7 @@ module Spree
 
       self.price = if self.area > 0
         self.area * self.price
+        #self.name += "SIZE: #{self.height.to_i}x#{self.weight.to_i}"
       end      
 
       #logger.fatal "************* #{opts} ************"
@@ -71,6 +72,14 @@ module Spree
 
     def calc_perimeter
       self.perimeter = (self.height.to_i + self.weight.to_i)*2 if (!self.height.blank? and !self.weight.blank?)
+    end
+
+    def name
+      if !self.height.blank? && !self.weight.blank?
+        variant.name + " - #{self.height.to_i}x#{self.weight.to_i}"
+      else
+        variant.name
+      end
     end
 
   end
