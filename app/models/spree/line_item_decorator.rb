@@ -80,7 +80,11 @@ module Spree
     end
 
     def calc_perimeter
-      self.perimeter = (self.height.to_i + self.width.to_i)*2 if (!self.height.blank? and !self.width.blank?)
+      if self.unit == "ft" && (!self.height.blank? and !self.width.blank?)
+        self.perimeter = (self.height.to_i + self.width.to_i)*2 
+      else
+        self.perimeter = ((self.height/12) * (self.width/12)).ceil
+      end
     end
 
     def name
