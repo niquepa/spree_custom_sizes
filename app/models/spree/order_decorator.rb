@@ -18,15 +18,16 @@ module Spree
       #puts "********** LINE ITEM HEIGHT #{line_item.height.to_i} ***********"
       #puts "********** LINE ITEM WEIGHT #{line_item.width.to_i} ***********"
       #puts "==================================================="
-      if options['height'].blank? && options['width'].blank?
-        true
-      else
-        if options['height'].to_i == line_item.height.to_i && options['width'].to_i == line_item.width.to_i
-          true
-        else
-          false
-        end
-      end
+      false
+      #if options['height'].blank? && options['width'].blank?
+      #  true
+      #else
+      #  if options['height'].to_i == line_item.height.to_i && options['width'].to_i == line_item.width.to_i
+      #    true
+      #  else
+      #    false
+      #  end
+      #end
     end
 
   end

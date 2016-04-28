@@ -3,6 +3,8 @@ module Spree
 
     alias_method :orig_update_price_from_modifier, :update_price_from_modifier
 
+    validates :job_name, presence: true
+
     def options=(options = {})
       return unless options.present?
 
@@ -13,6 +15,8 @@ module Spree
       #Incluimos los valores de Ancho y Alto
       self.height = options['height'] if !options['height'].blank?
       self.width = options['width'] if !options['width'].blank?
+      self.unit = options['unit'] if !options['unit'].blank?
+      self.job_name = options['job_name'] if !options['job_name'].blank?
       if self.height > 0 and self.width > 0
         self.calc_area 
         self.calc_perimeter
@@ -67,7 +71,12 @@ module Spree
     end
 
     def calc_area
-      self.area = self.height.to_i * self.width.to_i if (!self.height.blank? and !self.width.blank?)
+      if self.unit == "ft" && (!self.height.blank? and !self.width.blank?)
+        self.area = self.height * self.width
+      else
+        self.area = ((self.height/12) * (self.width/12)).ceil
+      end
+
     end
 
     def calc_perimeter
@@ -75,15 +84,11 @@ module Spree
     end
 
     def name
-      if !self.height.blank? && !self.width.blank?
-        variant.name + " - #{self.size}"
-      else
-        variant.name
-      end
+      !self.height.blank? && !self.width.blank? ? "#{self.job_name} - " + variant.name + " - #{self.size}" : variant.name
     end
 
     def size
-      "#{self.height.to_i}x#{self.width.to_i}"
+      "#{self.height.to_i}x#{self.width.to_i} #{self.unit}"
     end
 
   end

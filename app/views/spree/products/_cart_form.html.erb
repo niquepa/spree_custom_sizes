@@ -49,21 +49,43 @@
         </div>
 
         <% if @product.can_supply? %>
-          <div class="add-to-cart">
-            Height:
-            <%= number_field_tag :"options[height]", 1, class: 'title form-control', min: 1, max: 999 %>
-            Width:
-            <%= number_field_tag :"options[width]", 1, class: 'title form-control', min: 1, max: 999 %>            
+          <div class="row">
+            <div class="add-to-cart">
+              <div class="col-xs-10 col-md-4">
+                <%= Spree.t(:size_height) %>:
+                <%= number_field_tag :"options[height]", 1, class: 'title form-control', min: 1, max: 999 %>
+              </div>
+              <div class="col-xs-10 col-md-4">
+                <%= Spree.t(:size_width) %>:
+                <%= number_field_tag :"options[width]", 1, class: 'title form-control', min: 1, max: 999 %>
+              </div>
+              <div class="col-xs-10 col-md-4">
+                <%= Spree.t(:size_unit) %>:
+                <%= select_tag :"options[unit]", "<option value='in'>#{Spree.t(:in)}</option><option value='ft'>#{Spree.t(:ft)}</option>".html_safe, class: 'title form-control' %>
+              </div>
+            </div>
           </div>
-          <div class="add-to-cart">
-            <br />
-            <div class="input-group">
-              <%= number_field_tag :quantity, 1, class: 'title form-control', min: 1 %>
-              <span class="input-group-btn">
-                <%= button_tag class: 'btn btn-success', id: 'add-to-cart-button', type: :submit do %>
-                  <%= Spree.t(:add_to_cart) %>
-                <% end %>
-              </span>
+          <div class="row">
+            <div class="add-to-cart">
+              <div class="col-md-10">
+              <%= Spree.t(:job_name_text) %>:
+              <%= text_field_tag :"options[job_name]", nil, placeholder: "#{Spree.t(:job_name_placeholder)}", class: 'title form-control' %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="add-to-cart">
+              <div class="col-md-10">
+              <br />
+              <div class="input-group">
+                <%= number_field_tag :quantity, 1, class: 'title form-control', min: 1 %>
+                <span class="input-group-btn">
+                  <%= button_tag class: 'btn btn-success', id: 'add-to-cart-button', type: :submit do %>
+                    <%= Spree.t(:add_to_cart) %>
+                  <% end %>
+                </span>
+              </div>
+            </div>
             </div>
           </div>
         <% end %>

@@ -2,4 +2,12 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  spree:
+    ft: Feets
+    in: Inches
+    size_height: Height
+    size_width: Width
+    size_unit: Unit
+    job_name_text: Job Name
+    job_name_placeholder: Helps to identify the job
+

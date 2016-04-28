@@ -1,0 +1,9 @@
+es:
+  spree:
+    ft: Pies
+    in: Pulgadas
+    size_height: Alto
+    size_width: Ancho
+    size_unit: Unidad
+    job_name_text: Nombre
+    job_name_placeholder: Permite identificar el trabajo
