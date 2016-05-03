@@ -5,6 +5,8 @@ module Spree
 
     validates :job_name, presence: true
 
+    has_many :finishing_line_items
+
     def options=(options = {})
       return unless options.present?
 

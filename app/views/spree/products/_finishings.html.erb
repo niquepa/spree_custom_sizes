@@ -6,7 +6,8 @@
         <% @product.finishings.category.each do |category| %>
           <h5><%= category.presentation %></h5>
           <% @product.finishings.subcategory(category.id).each do |finishing| %>
-            <h6><%= finishing.presentation %></h6>
+            <%= radio_button_tag(:finishing, "#{finishing.id}") %>
+            <%= label_tag("finish-#{category.name}", "#{finishing.presentation}") %>
           <% end %>
         <% end %>
       </div>

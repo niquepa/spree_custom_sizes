@@ -1,0 +1,16 @@
+<div class="row" id="area" data-hook>
+  <div class="add-to-cart">
+    <div class="col-xs-10 col-md-4">
+      <h4><%= Spree.t(:size_height) %>:</h4>
+      <%= number_field_tag :"options[height]", 1, class: 'title form-control', min: 1, max: 999 %>
+    </div>
+    <div class="col-xs-10 col-md-4">
+      <h4><%= Spree.t(:size_width) %>:</h4>
+      <%= number_field_tag :"options[width]", 1, class: 'title form-control', min: 1, max: 999 %>
+    </div>
+    <div class="col-xs-10 col-md-4">
+      <h4><%= Spree.t(:size_unit) %>:</h4>
+      <%= select_tag :"options[unit]", "<option value='in'>#{Spree.t(:in)}</option><option value='ft'>#{Spree.t(:ft)}</option>".html_safe, class: 'title form-control' %>
+    </div>
+  </div>
+</div>
