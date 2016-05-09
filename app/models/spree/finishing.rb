@@ -11,8 +11,20 @@ module Spree
     scope :category, -> { where(:parent => [nil,'', 0]) }
     scope :subcategory, -> (parent) { where(:parent => parent) }
 
+    def init
+      self.frequency ||= 1
+    end
+    
     def has_parent?
-      !self.parent.blank? ? true : false
+      !self.parent.blank? && self.parent > 0 ? true : false
+    end
+
+    def is_parent?
+      Spree::Finishing.subcategory(self).count > 0 ? true : false
+    end
+
+    def need_location?
+      !self.loc_required.blank?
     end
 
   end

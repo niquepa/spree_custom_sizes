@@ -11,4 +11,11 @@ en:
     job_name_text: Job Name
     job_name_placeholder: Helps to identify the job
     finishings_title: Finishing
+    all: All
+    top: Top
+    bottom: Bottom
+    topbottom: Top & Bottom
+    right: Right
+    left: Left
+    rigthleft: Right & Left
 

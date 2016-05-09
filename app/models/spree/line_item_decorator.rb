@@ -5,7 +5,8 @@ module Spree
 
     validates :job_name, presence: true
 
-    has_many :finishing_line_items
+    has_many :finishing_line_items, :dependent => :destroy
+    #accepts_nested_attributes_for :finishing_line_items
 
     def options=(options = {})
       return unless options.present?
@@ -47,8 +48,16 @@ module Spree
       self.price = if self.area > 0
         self.area * self.price
         #self.name += "SIZE: #{self.height.to_i}x#{self.width.to_i}"
-      end      
+      end
 
+      logger.fatal "************* CALCULANDO EL PRECIO =>#{self.price} ************"
+
+      self.finishing_line_items.each do |fili|
+        logger.fatal "************* FILI=>#{fili.id} =>#{fili.price_modifier} ************"
+        self.price += fili.price_modifier
+      end
+
+      logger.fatal "************* DESPUES DE LOS FINISHINGS EL PRECIO =>#{self.price} ************"
       #logger.fatal "************* #{opts} ************"
       #logger.fatal "************* H=>#{opts['height']} ************"
       #logger.fatal "************* W=>#{opts['width']} ************"
@@ -76,7 +85,7 @@ module Spree
       if self.unit == "ft" && (!self.height.blank? and !self.width.blank?)
         self.area = self.height * self.width
       else
-        self.area = ((self.height/12) * (self.width/12)).ceil
+        self.area = ((self.height/12.0) * (self.width/12.0)).ceil
       end
 
     end
@@ -85,7 +94,7 @@ module Spree
       if self.unit == "ft" && (!self.height.blank? and !self.width.blank?)
         self.perimeter = (self.height.to_i + self.width.to_i)*2 
       else
-        self.perimeter = ((self.height/12) * (self.width/12)).ceil
+        self.perimeter = ((self.height/12.0) * (self.width/12.0)).ceil
       end
     end
 
