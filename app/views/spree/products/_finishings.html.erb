@@ -9,14 +9,14 @@
           <div id="<%= category.name %>">
             <h5>
               <%= check_box_tag(:"finishing_line_items[][finishing_id]", "#{category.id}", false, {:id => "finishing-#{category.name}"}) %>
-              <%= category.presentation %>
+              <%= "#{category.presentation}"+ (!category.is_parent? ? " ($#{category.price_multiplier})" : "" ) %>
             </h5>
             <div id="info-<%= category.name %>" style="display:none">
               <% if category.is_parent? %>
                 <div id="finishing-options-<%= category.name %>">
                   <% @product.finishings.subcategory(category.id).each_with_index do |finishing,i| %>
                     <%= radio_button_tag(:"finishing_line_items[][finishing_id]", "#{finishing.id}") %>
-                    <%= label_tag("finish-#{category.name}", "#{finishing.presentation} (#{finishing.price_multiplier})") %>
+                    <%= label_tag("finish-#{category.name}", "#{finishing.presentation} ($#{finishing.price_multiplier})") %>
                   <% end %>
                 </div>
               <% end %>
