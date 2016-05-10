@@ -28,12 +28,15 @@ module Spree
           params.permit!
 
           finishing_line_items.each do |finish_item|
-            fi = Spree::Finishing.find(finish_item[:finishing_id])
-            if !fi.is_parent?
-              fili = Spree::FinishingLineItem.new(finish_item)
-              fili.line_item = line_item
-              fili.save
+            fi = Spree::Finishing.find(finish_item["finishing_id"]) if finish_item["finishing_id"]
+            if fi
+              if (!fi.has_parent? && !fi.is_parent?) || (!fi.is_parent? && finishing_line_items.any? {|fin| fin["finishing_id"].to_i === fi.parent})
+                fili = Spree::FinishingLineItem.new(finish_item)
+                fili.line_item = line_item
+                fili.save
+              end
             end
+
           end
           #logger.fatal " CREADOS LOS FINISHINGS => #{line_item.id} 9999999"
           line_item = Spree::LineItem.find(line_item.id)

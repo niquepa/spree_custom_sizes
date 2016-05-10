@@ -19,7 +19,7 @@ module Spree
     end
 
     def copy_frequency
-      self.frequency = self.finishing.frequency || 1
+      self.frequency = self.finishing.frequency || 2
     end
 
     def copy_width_height

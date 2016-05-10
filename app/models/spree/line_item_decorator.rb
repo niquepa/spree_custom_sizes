@@ -85,7 +85,7 @@ module Spree
       if self.unit == "ft" && (!self.height.blank? and !self.width.blank?)
         self.area = self.height * self.width
       else
-        self.area = ((self.height/12.0) * (self.width/12.0)).ceil
+        self.area = ((self.height * self.width)/144.0).ceil
       end
 
     end
@@ -94,7 +94,7 @@ module Spree
       if self.unit == "ft" && (!self.height.blank? and !self.width.blank?)
         self.perimeter = (self.height.to_i + self.width.to_i)*2 
       else
-        self.perimeter = ((self.height/12.0) * (self.width/12.0)).ceil
+        self.perimeter = (((self.height+self.width)*2)/12.0).ceil
       end
     end
 
