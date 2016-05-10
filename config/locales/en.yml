@@ -18,4 +18,9 @@ en:
     right: Right
     left: Left
     rigthleft: Right & Left
-
+    2in: 2"
+    4in: 4"
+    location: location
+    size: Size
+    options: Options
+    custom: Custom

@@ -15,3 +15,9 @@ es:
     right: Derecho
     left: Izquierdo
     rigthleft: Derecho e Izquierdo
+    2in: 2"
+    4in: 4"
+    location: Ubicación
+    size: Tamaño
+    options: Opciones
+    custom: Personalizado

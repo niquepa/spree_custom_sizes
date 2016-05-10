@@ -38,15 +38,15 @@ module Spree
     def location_units
       case self.location
       when "all"
-        all_location
+        self.finishing.calc_linear? ? all_location_linear : all_location
       when "top", "bottom"
-        top_location
+        self.finishing.calc_linear? ? top_location_linear : top_location
       when "t+b"
-        top_bottom_location
+        self.finishing.calc_linear? ? top_bottom_location_linear : top_bottom_location
       when "left", "right"
-        right_location
+        self.finishing.calc_linear? ? right_location_linear : right_location
       when "r+l"
-        right_left_location
+        self.finishing.calc_linear? ? right_left_location_linear : right_left_location
       when "corners"
         4
       else
@@ -60,24 +60,44 @@ module Spree
       top_location
     end
 
+    def top_location_linear
+      self.line_item.width
+    end
+
     def right_location
       right_location = (self.height/frequency.to_f).ceil
       right_location = 2 unless right_location > 2
       right_location
     end
 
+    def right_location_linear
+      self.line_item.height
+    end
+
     def top_bottom_location
       top_location * 2
+    end
+
+    def top_bottom_location_linear
+      top_location_linear * 2
     end
 
     def right_left_location
       right_location * 2
     end
 
+    def right_left_location_linear
+      right_location_linear * 2
+    end
+
     def all_location
       all_location = (top_bottom_location)+(right_left_location)-4
       all_location = 4 unless all_location > 4
       all_location
+    end
+
+    def all_location_linear
+      self.line_item.perimeter
     end
 
   end

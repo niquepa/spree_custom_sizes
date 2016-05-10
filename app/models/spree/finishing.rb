@@ -4,6 +4,8 @@ module Spree
     belongs_to :product
     has_many :finishing_line_items
 
+    enum type_calc: { calc_linear: 0, calc_custom: 1 }
+
     validates :name, presence: true
     validates :price_multiplier, numericality: true
 
@@ -25,6 +27,10 @@ module Spree
 
     def need_location?
       !self.loc_required.blank?
+    end
+
+    def need_size?
+      !self.size_required.blank?
     end
 
   end
