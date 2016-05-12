@@ -55,7 +55,7 @@ module Spree
     end
 
     def top_location
-      top_location = (self.width/frequency.to_f).ceil
+      top_location = (self.width+1/frequency.to_f).ceil
       top_location = 2 unless top_location > 2
       top_location
     end
@@ -65,7 +65,7 @@ module Spree
     end
 
     def right_location
-      right_location = (self.height/frequency.to_f).ceil
+      right_location = (self.height+1/frequency.to_f).ceil
       right_location = 2 unless right_location > 2
       right_location
     end
