@@ -23,8 +23,8 @@ module Spree
     end
 
     def copy_width_height
-      self.width = line_item.unit == "ft" ? line_item.width : (line_item.width/12.0).ceil
-      self.height = line_item.unit == "ft" ? line_item.height : (line_item.height/12.0).ceil
+      self.width = line_item.unit == "ft" ? line_item.width*12 : line_item.width
+      self.height = line_item.unit == "ft" ? line_item.height*12 : line_item.height
     end
 
     def calc_quantity
@@ -55,7 +55,7 @@ module Spree
     end
 
     def top_location
-      top_location = (self.width+1/frequency.to_f).ceil
+      top_location = ((self.width+1)/(frequency.to_f*12)).ceil
       top_location = 2 unless top_location > 2
       top_location
     end
@@ -65,7 +65,7 @@ module Spree
     end
 
     def right_location
-      right_location = (self.height+1/frequency.to_f).ceil
+      right_location = ((self.height+1)/(frequency.to_f*12)).ceil
       right_location = 2 unless right_location > 2
       right_location
     end
@@ -97,7 +97,7 @@ module Spree
     end
 
     def all_location_linear
-      self.line_item.perimeter
+      self.line_item.perimeter/12
     end
 
   end

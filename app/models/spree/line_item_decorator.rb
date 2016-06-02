@@ -46,7 +46,7 @@ module Spree
       #calc_perimeter(opts)
 
       self.price = if self.area > 0
-        self.area * self.price
+        (self.area/144) * self.price
         #self.name += "SIZE: #{self.height.to_i}x#{self.width.to_i}"
       end
 
@@ -83,18 +83,17 @@ module Spree
 
     def calc_area
       if self.unit == "ft" && (!self.height.blank? and !self.width.blank?)
-        self.area = self.height * self.width
+        self.area = (self.height.to_i*self.width.to_i)*12
       else
-        self.area = ((self.height * self.width)/144.0).ceil
+        self.area = (self.height * self.width)
       end
-
     end
 
     def calc_perimeter
       if self.unit == "ft" && (!self.height.blank? and !self.width.blank?)
-        self.perimeter = (self.height.to_i + self.width.to_i)*2 
+        self.perimeter = (self.height.to_i + self.width.to_i)*24
       else
-        self.perimeter = (((self.height+self.width)*2)/12.0).ceil
+        self.perimeter = (self.height+self.width)*2
       end
     end
 
