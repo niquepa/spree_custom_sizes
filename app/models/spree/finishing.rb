@@ -33,5 +33,9 @@ module Spree
       !self.size_required.blank?
     end
 
+    def padre
+      Spree::Finishing.find(self.parent)
+    end
+
   end
 end
