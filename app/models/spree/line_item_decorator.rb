@@ -16,9 +16,10 @@ module Spree
       currency = opts.delete(:currency) || order.try(:currency)
 
       #Incluimos los valores de Ancho y Alto
+      self.unit = options['unit'] if !options['unit'].blank?
       self.height = options['height'] if !options['height'].blank?
       self.width = options['width'] if !options['width'].blank?
-      self.unit = options['unit'] if !options['unit'].blank?
+
       self.job_name = options['job_name'] if !options['job_name'].blank?
       if self.height > 0 and self.width > 0
         self.calc_area 
@@ -83,7 +84,7 @@ module Spree
 
     def calc_area
       if self.unit == "ft" && (!self.height.blank? and !self.width.blank?)
-        self.area = (self.height.to_i*self.width.to_i)*12
+        self.area = (self.height.to_i*self.width.to_i)*144
       else
         self.area = (self.height * self.width)
       end
