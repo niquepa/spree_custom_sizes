@@ -55,7 +55,7 @@ module Spree
         redirect_back_or_default(spree.root_path)
       else
         respond_with(order) do |format|
-          format.html { redirect_to cart_path }
+          format.html { redirect_to new_line_item_file_path line_item }
         end
       end
     end
