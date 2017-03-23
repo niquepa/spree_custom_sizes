@@ -1,21 +1,9 @@
 <% if line_item.finishing_line_items.count > 0 %>
   <ul>
-    <li><b>Area:</b><%="#{line_item.area/144} FT"%></li>
-    <li><b>Area Price:</b><%="#{(line_item.area/144)*line_item.product.price}"%></li>
-  <% line_item.finishing_line_items.each do |fin_line_item| %>
-    <li>
-    <span>
-      <b>Finishing:</b>
-      <%= "#{fin_line_item.finishing.padre.presentation} - " if fin_line_item.finishing.has_parent? %>
-      <%= fin_line_item.finishing.presentation %>
-    </span>
-    <ul>
-      <li><b>UnitPrice:</b><%=fin_line_item.price_multiplier%></li>    
-      <li><b>Quantity:</b><%=fin_line_item.quantity%></li>
-      <li><b>TotalPrice:</b><%=fin_line_item.price_modifier%></li>
-    </ul>
-
-    </li>
-  <% end %>
+    <% line_item.finishing_line_items.each do |fin_line_item| %>
+      <li>
+          <%= fin_line_item.finishing.presentation %> -  <%= fin_line_item.location %>
+      </li>
+    <% end %>
   </ul>
 <% end %>
