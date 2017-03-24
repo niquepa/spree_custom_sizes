@@ -1,0 +1,9 @@
+<% if line_item.finishing_line_items.count > 0 %>
+  <ul>
+    <% line_item.finishing_line_items.each do |fin_line_item| %>
+      <li>
+          <%= fin_line_item.finishing.presentation %> -  <%= fin_line_item.location %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
