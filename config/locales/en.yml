@@ -1,0 +1,26 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  spree:
+    ft: Feets
+    in: Inches
+    size_height: Height
+    size_width: Width
+    size_unit: Unit
+    job_name_text: Job Name
+    job_name_placeholder: Helps to identify the job
+    finishings_title: Finishing
+    all: All
+    top: Top
+    bottom: Bottom
+    topbottom: Top & Bottom
+    right: Right
+    left: Left
+    rigthleft: Right & Left
+    2in: 2"
+    4in: 4"
+    location: location
+    size: Size
+    options: Options
+    custom: Custom

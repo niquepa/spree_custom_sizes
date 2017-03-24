@@ -1,0 +1,52 @@
+<% if @product.finishings.count > 0 %>
+  <div class="row" id="finishings" data-hook>
+    <div class="add-to-cart">
+      <div class="col-md-10">
+        <h4><%= Spree.t(:finishings_title) %>:</h4>
+        <%#= check_box_tag(:"options[finishing][]", "yes") %>
+        <%#= check_box_tag(:"options[finishing][]", "no") %>
+        <% @product.finishings.category.each do |category| %>
+          <div id="<%= category.name %>">
+            <h5>
+              <%= check_box_tag(:"finishing_line_items[][finishing_id]", "#{category.id}", false, {:id => "finishing-#{category.name}"}) %>
+              <%= "#{category.presentation}"+ (!category.is_parent? ? " ($#{category.price_multiplier})" : "" ) %>
+            </h5>
+            <div id="info-<%= category.name %>" style="display:none">
+              <% if category.is_parent? %>
+                <div id="finishing-options-<%= category.name %>">
+                  <h6><%= Spree.t(:options)%>:</h6>
+                  <% @product.finishings.subcategory(category.id).each_with_index do |finishing,i| %>
+                    <%= radio_button_tag(:"finishing_line_items[][finishing_id]", "#{finishing.id}") %>
+                    <%= label_tag("finish-#{category.name}", "#{finishing.presentation} ($#{finishing.price_multiplier})") %>
+                  <% end %>
+                </div>
+              <% end %>
+              <% if category.need_location? %>
+                <div id="finishing-locations-<%= category.name %>">
+                  <h6><%= Spree.t(:location)%>:</h6>
+                  <%= select_tag :"finishing_line_items[][location]", "<option value='all'>#{Spree.t(:all)}</option><option value='top'>#{Spree.t(:top)}</option><option value='bottom'>#{Spree.t(:bottom)}</option><option value='t+b'>#{Spree.t(:topbottom)}</option><option value='right'>#{Spree.t(:right)}</option><option value='left'>#{Spree.t(:left)}</option><option value='r+l'>#{Spree.t(:rigthleft)}</option>".html_safe, class: 'title form-control' %>
+                </div>
+              <% end %>
+              <% if category.need_size? %>
+                <div id="finishing-locations-<%= category.name %>">
+                  <h6><%= Spree.t(:size)%>:</h6>
+                  <%= radio_button_tag(:"finishing_line_items[][size]", "2in", true) %>
+                  <%= label_tag("finish-#{category.name}", Spree.t(:"2in")) %>
+                  <%= radio_button_tag(:"finishing_line_items[][size]", "4in") %>
+                  <%= label_tag("finish-#{category.name}", Spree.t(:"4in")) %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <script type="text/javascript">
+            $(function() {
+              $("#finishing-<%= category.name%>").click(function() {
+                $("#info-<%= category.name%>").toggle();
+              });
+            });
+          </script>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
